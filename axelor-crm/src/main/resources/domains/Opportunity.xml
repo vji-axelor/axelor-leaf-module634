@@ -37,7 +37,7 @@
     <string name="lostReasonStr" title="Lost reason" large="true"/>
     <many-to-one name="tradingName" ref="com.axelor.apps.base.db.TradingName"/>
     <string name="opportunitySeq" title="Reference" readonly="true" unique="true"/>
-
+    <integer name="priority" selection="crm.opportunity.priority.select"/>
     <extra-code>
 		<![CDATA[
 		// Stage SELECT

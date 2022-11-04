@@ -169,4 +169,10 @@
     <option value="12">December</option>
   </selection>
 
+  <selection name="crm.opportunity.priority.select">
+    <option value="1">Normal</option>
+    <option value="2">Waiting</option>
+    <option value="3">Important</option>
+  </selection>
+
 </object-views>
