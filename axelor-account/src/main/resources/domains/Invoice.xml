@@ -219,7 +219,8 @@
     <string name="paymentDelayReasonComments" title="Payment delay reason comments"
       large="true"/>
     <date name="nextActionDate" title="Next action date"/>
-
+    <many-to-one name="salespersonUser" ref="com.axelor.auth.db.User"
+      title="Salesperson" massUpdate="true"/>
 
     <!-- Discount -->
     <many-to-one name="financialDiscount"

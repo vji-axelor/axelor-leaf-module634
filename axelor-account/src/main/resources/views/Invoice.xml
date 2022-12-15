@@ -994,6 +994,7 @@ InvoiceSet.length > 0))"
         canCollapse="true" collapseIf="true">
         <field name="internalReference"/>
         <field name="externalReference"/>
+        <field name="salespersonUser"/>
       </panel>
       <panel name="datesPanel" title="Dates" readonlyIf="statusSelect == 3" canCollapse="true"
         collapseIf="true">
@@ -1636,6 +1637,7 @@ InvoiceSet.length > 0))"
     <field name="printingSettings" expr="eval: __user__.activeCompany?.printingSettings"
       if="__user__.activeCompany != null"/>
     <field name="tradingName" expr="eval: __user__?.tradingName"/>
+    <field name="salespersonUser" expr="eval:__user__"/>
   </action-record>
 
   <action-record

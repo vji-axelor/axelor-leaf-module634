@@ -31,6 +31,22 @@
                 <property name="category">Unformatted</property>
             </structure>
         </scalar-parameter>
+        <scalar-parameter name="AttachmentPath" id="3818">
+            <property name="hidden">true</property>
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant"></value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
     </parameters>
     <data-sources>
         <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Data Source" id="4">
@@ -51,7 +67,7 @@
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">org.postgresql.Driver</property>
-            <property name="odaURL">jdbc:postgresql://localhost:5432/axelor_lin</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5432/axelor_lin634</property>
             <property name="odaUser">postgres</property>
             <encrypted-property name="odaPassword" encryptionID="base64">cm9vdA==</encrypted-property>
         </oda-data-source>
@@ -203,6 +219,12 @@
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">salepersonname</text-property>
                     <text-property name="heading">salepersonname</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">imagename</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">imagename</text-property>
+                    <text-property name="heading">imagename</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">salepersonphone</property>
@@ -359,16 +381,21 @@
                     </structure>
                     <structure>
                         <property name="position">25</property>
-                        <property name="name">salepersonphone</property>
+                        <property name="name">imagename</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">26</property>
-                        <property name="name">salepersonemail</property>
+                        <property name="name">salepersonphone</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">27</property>
+                        <property name="name">salepersonemail</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">28</property>
                         <property name="name">termsandcondition</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -546,20 +573,27 @@
                 </structure>
                 <structure>
                     <property name="position">25</property>
+                    <property name="name">imagename</property>
+                    <property name="nativeName">imagename</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">26</property>
                     <property name="name">salepersonphone</property>
                     <property name="nativeName">salepersonphone</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">26</property>
+                    <property name="position">27</property>
                     <property name="name">salepersonemail</property>
                     <property name="nativeName">salepersonemail</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">27</property>
+                    <property name="position">28</property>
                     <property name="name">termsandcondition</property>
                     <property name="nativeName">termsandcondition</property>
                     <property name="dataType">string</property>
@@ -595,6 +629,7 @@ Contact.mobile_phone as ContactPhone,
 ContactEmailAddress.address as ContactEmail,
 
 Authuser.name as SalePersonName,
+MetaFile.file_name as ImageName,
 AuthuserPartner.mobile_phone as SalePersonPhone,
 AuhtPersoneEmailAddress.address as SalePersonEmail,
 PrintingSettings.pdf_header as TermsAndCondition
@@ -612,7 +647,8 @@ left outer join base_partner as Contact on (Contact.id = Invoice.contact_partner
 left outer join message_email_address as ContactEmailAddress on (Contact.email_address = ContactEmailAddress.id)
 left outer join base_address as Address on (Address.id = Invoice.address)
 left outer join sale_sale_order as SaleOrder on (SaleOrder.id = Invoice.sale_order)
-left outer join auth_user as Authuser on (SaleOrder.salesperson_user = Authuser.id)
+left outer join auth_user as Authuser on (Invoice.salesperson_user = Authuser.id)
+left outer join meta_file as MetaFile on (Authuser.electronic_signature = MetaFile.id)
 left outer join base_partner as AuthuserPartner on (Authuser.partner = AuthuserPartner.id)
 left outer join message_email_address as AuhtPersoneEmailAddress on (AuthuserPartner.email_address = AuhtPersoneEmailAddress.id)
 left outer join base_printing_settings as PrintingSettings on (Invoice.printing_settings = PrintingSettings.id)
@@ -2065,6 +2101,14 @@ where Invoice.id = ?]]></xml-property>
             <property name="borderBottomWidth">thin</property>
             <property name="marginTop">5pt</property>
             <property name="width">7.971830985915493in</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">Column Binding</property>
+                    <expression name="expression" type="javascript">params["AttachmentPath"].value</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+            </list-property>
             <column id="164">
                 <property name="width">4.366197183098592in</property>
             </column>
@@ -2075,6 +2119,19 @@ where Invoice.id = ?]]></xml-property>
                         <property name="fontSize">11pt</property>
                         <text-property name="text">Approved by:</text-property>
                     </label>
+                    <text id="3819">
+                        <property name="dataSet">Invoice</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">imagename</property>
+                                <text-property name="displayName">imagename</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["imagename"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<VALUE-OF format="HTML">"<IMG src='"+params["AttachmentPath"].value + row["imagename"]+"' width='200' height='100'/>"</VALUE-OF>]]></text-property>
+                    </text>
                     <data id="208">
                         <property name="backgroundAttachment">scroll</property>
                         <property name="backgroundPositionX">0%</property>
@@ -2101,7 +2158,7 @@ where Invoice.id = ?]]></xml-property>
                         <property name="borderTopColor">black</property>
                         <property name="borderTopStyle">none</property>
                         <property name="borderTopWidth">medium</property>
-                        <property name="marginTop">25pt</property>
+                        <property name="marginTop">2pt</property>
                         <property name="marginLeft">0pt</property>
                         <property name="marginBottom">0pt</property>
                         <property name="marginRight">0pt</property>
