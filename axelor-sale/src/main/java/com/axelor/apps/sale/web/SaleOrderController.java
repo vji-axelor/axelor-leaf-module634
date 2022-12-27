@@ -17,6 +17,7 @@
  */
 package com.axelor.apps.sale.web;
 
+import com.axelor.apps.ReportFactory;
 import com.axelor.apps.account.db.FiscalPosition;
 import com.axelor.apps.account.db.PaymentMode;
 import com.axelor.apps.base.db.BankDetails;
@@ -674,5 +675,28 @@ public class SaleOrderController {
     } catch (Exception e) {
       TraceBackService.trace(response, e);
     }
+  }
+
+  public void printDo(ActionRequest request, ActionResponse response) throws AxelorException {
+    SaleOrder saleOrder = request.getContext().asType(SaleOrder.class);
+    String locale = ReportSettings.getPrintingLocale(saleOrder.getClientPartner());
+
+    String fileLink =
+        ReportFactory.createReport("SaleOrder_Do.rptdesign", "Delivery Order")
+            // .addParam("StartDate", Date.valueOf(startDate))
+            // .addParam("EndDate", Date.valueOf(endtDate))
+            .addParam("SaleOrderId", saleOrder.getId())
+            .addParam(
+                "Timezone",
+                saleOrder.getCompany() != null ? saleOrder.getCompany().getTimezone() : null)
+            .addParam("Locale", locale)
+            .addParam("HeaderHeight", saleOrder.getPrintingSettings().getPdfHeaderHeight())
+            .addParam("FooterHeight", saleOrder.getPrintingSettings().getPdfFooterHeight())
+            .addParam(
+                "AddressPositionSelect", saleOrder.getPrintingSettings().getAddressPositionSelect())
+            .generate()
+            .getFileLink();
+
+    response.setView(ActionView.define("Delivry Order").add("html", fileLink).map());
   }
 }

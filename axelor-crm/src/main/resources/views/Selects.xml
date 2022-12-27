@@ -173,6 +173,7 @@
     <option value="1">Normal</option>
     <option value="2">Waiting</option>
     <option value="3">Important</option>
+    <option value="4">Urgent</option>
   </selection>
 
 </object-views>
