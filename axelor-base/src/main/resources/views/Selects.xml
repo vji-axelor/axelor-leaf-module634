@@ -484,6 +484,8 @@
     <option value="nl">Dutch Beta</option>
     <option value="pl">Polish Beta</option>
     <option value="ru">Russian Beta</option>
+    <option value="cn">Chinese</option>
+    <option value="my">Malaysia</option>
   </selection>
 
   <selection name="frequency.base.type.select">
