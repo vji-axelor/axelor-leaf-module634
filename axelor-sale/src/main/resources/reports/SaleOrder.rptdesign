@@ -742,7 +742,7 @@ where SaleOrder.id = ?
         <simple-master-page name="Simple MasterPage" id="2">
             <property name="showFooterOnLast">true</property>
             <property name="headerHeight">2.2in</property>
-            <property name="footerHeight">2.5in</property>
+            <property name="footerHeight">2.65in</property>
             <page-header>
                 <grid id="175">
                     <property name="borderBottomStyle">solid</property>
@@ -1456,8 +1456,6 @@ where SaleOrder.id = ?
                                 </row>
                             </grid>
                             <grid id="4575">
-                                <property name="borderBottomStyle">solid</property>
-                                <property name="borderBottomWidth">thin</property>
                                 <property name="marginTop">5pt</property>
                                 <property name="pageBreakInside">avoid</property>
                                 <property name="width">7.971830985915493in</property>
@@ -1581,23 +1579,40 @@ where SaleOrder.id = ?
                                         <label id="4587">
                                             <property name="fontSize">11pt</property>
                                             <property name="marginTop">38pt</property>
+                                            <property name="marginLeft">4pt</property>
                                             <text-property name="text">Customer Signature :_____________________</text-property>
                                         </label>
                                         <label id="4588">
                                             <property name="fontSize">11pt</property>
                                             <property name="marginTop">3pt</property>
+                                            <property name="marginLeft">4pt</property>
                                             <text-property name="text">DATE : _______________________________</text-property>
                                         </label>
                                         <label id="4589">
                                             <property name="fontSize">11pt</property>
                                             <property name="marginTop">3pt</property>
+                                            <property name="marginLeft">4pt</property>
                                             <text-property name="text">Full Name: ____________________________</text-property>
                                         </label>
                                         <label id="4590">
                                             <property name="fontSize">11pt</property>
-                                            <property name="marginTop">4pt</property>
+                                            <property name="marginTop">3pt</property>
+                                            <property name="marginLeft">4pt</property>
                                             <text-property name="text">IC numbers :___________________________</text-property>
                                         </label>
+                                    </cell>
+                                </row>
+                                <row id="4728">
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <cell id="4729"/>
+                                    <cell id="4730">
+                                        <auto-text id="4723">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="marginRight">10pt</property>
+                                            <property name="textAlign">right</property>
+                                            <property name="type">page-number</property>
+                                        </auto-text>
                                     </cell>
                                 </row>
                             </grid>
@@ -2469,7 +2484,7 @@ where SaleOrder.id = ?
                                         <property name="showIfBlank">false</property>
                                         <property name="canShrink">false</property>
                                         <property name="overflow">hidden</property>
-                                        <text-property name="text">Total: </text-property>
+                                        <text-property name="text">Total Amount: </text-property>
                                     </label>
                                 </cell>
                                 <cell id="144">
