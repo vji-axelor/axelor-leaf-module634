@@ -273,8 +273,7 @@
           showIf="statusSelect &gt;= 3 &amp;&amp; statusSelect &lt;= 4" readonly="true"/>
       </panel>
       <panel name="printingPanel" title="Printing">
-        <field name="printingSettings"
-          onSelect="" canEdit="false"/>
+        <field name="printingSettings" onSelect="" canEdit="false"/>
         <field name="groupProductsOnPrintings"
           if="__config__.app.getApp('base')?.getIsRegroupProductsOnPrintings()" colSpan="6"/>
         <field name="displayPriceOnQuotationRequest" colSpan="12"/>

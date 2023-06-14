@@ -608,8 +608,7 @@
       </panel>
       <panel if="__config__.app.getApp('sale')?.getPrintingConfigPerSaleOrder()"
         name="printingPanel" title="Printing">
-        <field name="printingSettings" canEdit="false"
-          onSelect=""/>
+        <field name="printingSettings" canEdit="false" onSelect=""/>
         <field name="groupProductsOnPrintings"
           if="__config__.app.getApp('base')?.getIsRegroupProductsOnPrintings()" colSpan="6"/>
         <field name="hideDiscount"/>
